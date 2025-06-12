@@ -131,7 +131,7 @@ window.Asc = {
 
 const pos = location.href.indexOf('store/index.html'); // position for make substring
 const ioUrl = location.href.substring(0, pos);         // real IO URL
-const configUrl = ( isLocal ? OOMarketplaceUrl : location.href.substring(0, pos) ) + 'store/config.json'; // url to config.json (it's for desktop. we should use remote config)
+const configUrl = OOMarketplaceUrl + 'store/config.json'; // url to config.json (it's for desktop. we should use remote config)
 
 // get translation file
 getTranslation();
