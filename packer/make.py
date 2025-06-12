@@ -9,7 +9,7 @@ base.configure_common_apps()
 
 def pack_plugins():
 
-    content_dir = "sdkjs-plugins/content/"
+    content_dir = "../sdkjs-plugins/content/"
     
     if not base.is_exist(content_dir):
         return
