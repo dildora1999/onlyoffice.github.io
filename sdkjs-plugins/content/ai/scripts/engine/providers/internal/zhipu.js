@@ -1,6 +1,6 @@
 "use strict";
 
-class Provider extends AI.Provider {
+export default class Provider extends AI.Provider {
 
 	constructor() {
 		super("ZhiPu", "https://open.bigmodel.cn", "/api/paas/v4", "");
@@ -56,5 +56,14 @@ class Provider extends AI.Provider {
 			model: model.id,
 			messages: messages
 		};
+	}
+
+	// ZhiPu currently does not support image generation or vision
+	getImageGeneration() {
+		return {};
+	}
+
+	async getImageVision() {
+		return {};
 	}
 }
