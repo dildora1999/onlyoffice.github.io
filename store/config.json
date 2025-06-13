@@ -23,7 +23,6 @@
 	{ "name": "zotero", "discussion": "244" },
 	{ "name": "languagetool", "discussion": "245" },
 	{ "name": "chess", "discussion": "246" },
-	{ "name": "ai", "discussion": "248" },
 	{ "name": "speechrecognition", "discussion": "249" },
 	{ "name": "zhipu", "discussion": "273"},
 	{ "name": "glavred", "discussion": "274" },
@@ -36,5 +35,6 @@
 	{ "name": "pomodoro", "discussion": "" },
 	{ "name": "videoembedder", "discussion": "" },
 	{ "name": "mathtype", "discussion": "" },
-	{ "name": "mathpix", "discussion": "" }
+	{ "name": "mathpix", "discussion": "" },
+	{ "name": "ai", "discussion": "" }
 ]
