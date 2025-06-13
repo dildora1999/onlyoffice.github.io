@@ -93,22 +93,6 @@
                 }
             ]
         },
-        "Ollama": {
-            "name": "Ollama",
-            "url": "http://localhost:11434",
-            "key": "",
-            "models": [
-                {
-                    "id": "llama3.2:latest",
-                    "object": "model",
-                    "created": 1739120925,
-                    "owned_by": "library",
-                    "name": "llama3.2:latest",
-                    "endpoints": [],
-                    "options": {}
-                }
-            ]
-        },
         "ZhiPu": {
             "name": "ZhiPu",
             "url": "https://open.bigmodel.cn",
@@ -119,10 +103,8 @@
                     "object": "model",
                     "owned_by": "zhipu",
                     "name": "glm-4",
-                    "endpoints": [1],
-                    "options": {
-                        "max_input_tokens": 8192
-                    }
+                    "endpoints": [],
+                    "options": {}
                 }
             ]
         }
