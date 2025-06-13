@@ -109,8 +109,8 @@
                 }
             ]
         },
-        "ZhiPu": {
-            "name": "ZhiPu",
+        "ZhiPu-GLM": {
+            "name": "ZhiPu-GLM",
             "url": "https://open.bigmodel.cn",
             "key": "12fd15403c314b5bbff82329e51e0487.Eg3uGUNX9FPY90ez",
             "models": [
