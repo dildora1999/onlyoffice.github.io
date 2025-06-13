@@ -3,7 +3,7 @@
 export default class Provider extends AI.Provider {
 
 	constructor() {
-		super("ZhiPu", "https://open.bigmodel.cn", "/api/paas/v4", "");
+		super("ZhiPu", "https://open.bigmodel.cn", "", "/api/paas/v4");
 	}
 
 	correctModelInfo(model) {
