@@ -112,18 +112,20 @@
         "ZhiPu": {
             "name": "ZhiPu",
             "url": "https://open.bigmodel.cn",
-            "key": "",
+            "key": "12fd15403c314b5bbff82329e51e0487.Eg3uGUNX9FPY90ez",
             "models": [
-              {
-                "id": "glm-4",
-                "name": "glm-4",
-                "endpoints": [1],
-                "options": {
-                  "max_input_tokens": 8192
+                {
+                    "id": "glm-4",
+                    "object": "model",
+                    "owned_by": "zhipu",
+                    "name": "glm-4",
+                    "endpoints": [1],
+                    "options": {
+                        "max_input_tokens": 8192
+                    }
                 }
-              }
             ]
-          }
+        }
     },
     "models": [
         {
