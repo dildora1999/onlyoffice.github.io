@@ -95,15 +95,17 @@ class Provider extends AI.Provider {
 			const url = data.data[0].url;
 			const width = 256 * (25.4 / 96.0) * 36000;
 			const height = 256 * (25.4 / 96.0) * 36000;
-			Asc.plugin.callCommand(function () {
-                let oDocument = Api.GetDocument();
-                let oParagraph = Api.CreateParagraph();
-                let oDrawing = Api.CreateImage(url, width, height);
-                oParagraph.AddDrawing(oDrawing);
 
-                // insert picture and replace the selecting word
-                oDocument.InsertContent([oParagraph]);
-            })
+			Asc.scope.url = url;
+			Asc.scope.imgsize = { width: 256, height: 256 };
+
+			Asc.plugin.callCommand(() => {
+				const oDocument = Api.GetDocument();
+				const oParagraph = Api.CreateParagraph();
+				const oDrawing = Api.CreateImage(Asc.scope.url, width, height);
+				oParagraph.AddDrawing(oDrawing);
+				oDocument.InsertContent([oParagraph]);
+			}, false);
 		}
 		return "";
 	}
