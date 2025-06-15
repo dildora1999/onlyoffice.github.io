@@ -27,6 +27,49 @@
     },
     
     "providers": {
+        "OpenAI": {
+            "name": "OpenAI",
+            "url": "https://api.openai.com",
+            "key": "OPEN-AI-KEY",
+            "models": [
+                {
+                    "id": "chatgpt-4o-latest",
+                    "object": "model",
+                    "created": 1723515131,
+                    "owned_by": "system",
+                    "name": "chatgpt-4o-latest",
+                    "endpoints": [
+                        1
+                    ],
+                    "options": {}
+                },                
+                {
+                    "id": "gpt-4o",
+                    "object": "model",
+                    "created": 1715367049,
+                    "owned_by": "system",
+                    "name": "gpt-4o",
+                    "endpoints": [
+                        1
+                    ],
+                    "options": {
+                        "max_input_tokens": 131072
+                    }
+                }
+            ]
+        },
+        "Together AI": {
+            "name": "Together AI",
+            "url": "https://api.together.xyz",
+            "key": "",
+            "models": []
+        },
+        "Mistral": {
+            "name": "Mistral",
+            "url": "https://api.mistral.ai",
+            "key": "",
+            "models": []
+        },
         "Deepseek": {
             "name": "Deepseek",
             "url": "https://api.deepseek.com",
@@ -67,6 +110,48 @@
         }
     },
     "models": [
+        {
+            "capabilities": 129,
+            "provider": "Groq",
+            "name": "Groq [llama-3.2-90b-vision-preview]",
+            "id": "llama-3.2-90b-vision-preview"
+        },
+        {
+            "capabilities": 1,
+            "provider": "Together AI",
+            "name": "Together AI [mistralai/Mistral-7B-v0.1]",
+            "id": "mistralai/Mistral-7B-v0.1"
+        },
+        {
+            "capabilities": 1,
+            "provider": "Together AI",
+            "name": "Together AI [deepseek-ai/DeepSeek-V3]",
+            "id": "deepseek-ai/DeepSeek-V3"
+        },
+        {
+            "capabilities": 129,
+            "provider": "OpenAI",
+            "name": "OpenAI [chatgpt-4o-latest]",
+            "id": "chatgpt-4o-latest"
+        },
+        {
+            "capabilities": 129,
+            "provider": "Anthropic",
+            "name": "Anthropic [claude-3-sonnet-20240229]",
+            "id": "claude-3-sonnet-20240229"
+        },
+        {
+            "capabilities": 129,
+            "provider": "Google-Gemini",
+            "name": "Google-Gemini [gemini-1.5-pro-latest]",
+            "id": "gemini-1.5-pro-latest"
+        },
+        {
+            "capabilities": 255,
+            "provider": "Ollama",
+            "name": "Ollama [llama3.2:latest]",
+            "id": "llama3.2:latest"
+        },
         {
             "capabilities": 255,
             "provider": "Deepseek",
