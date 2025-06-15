@@ -517,6 +517,23 @@
 			return provider.getImageGenerationResult(data, model);			
 		};
 
+		if (provider.name === "ZhiPu" && model.id === "cogview-3" && data && data?.data?.[0]?.url) {
+			const url = data.data[0].url;
+			const width = 256 * (25.4 / 96.0) * 36000;
+			const height = 256 * (25.4 / 96.0) * 36000;
+
+			Asc.scope.url = url;
+			Asc.scope.imgsize = { width: 256, height: 256 };
+
+			Asc.plugin.callCommand(() => {
+				const oDocument = Api.GetDocument();
+				const oParagraph = Api.CreateParagraph();
+				const oDrawing = Api.CreateImage(Asc.scope.url, width, height);
+				oParagraph.AddDrawing(oDrawing);
+				oDocument.InsertContent([oParagraph]);
+			}, false);
+		}
+
 		objRequest.isUseProxy = AI._extendBody(provider, objRequest.body);
 
 		let result = await requestWrapper(objRequest);
