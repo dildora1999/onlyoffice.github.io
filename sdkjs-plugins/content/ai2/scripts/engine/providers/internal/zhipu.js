@@ -3,7 +3,7 @@
 class Provider extends AI.Provider {
 
 	constructor(options) {
-		super("ZhiPu", "https://open.bigmodel.cn/api/paas/v4", "", "");
+		super("ZhiPu", "https://open.bigmodel.cn/api/paas/v4", options.key, "");
 	}
 
 	correctModelInfo(model) {
