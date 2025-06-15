@@ -34,6 +34,28 @@ class Provider extends AI.Provider {
 		return headers;
 	}
 
+	getModels() {
+		return [
+			{
+				id: "glm-4",
+				name: "glm-4",
+				provider: "ZhiPu",
+				endpoints: [AI.Endpoints.Types.v1.Chat_Completions],
+				options: {
+					max_input_tokens: 8192
+				}
+			},
+			{
+				id: "cogview-3",
+				name: "cogview-3",
+				provider: "ZhiPu",
+				endpoints: [AI.Endpoints.Types.v1.Images_Generations],
+				options: {}
+			}
+		];
+	}
+	
+
 	getChatCompletions(message, model) {
 		const messages = message.messages.map(m => ({
 			role: m.role,
