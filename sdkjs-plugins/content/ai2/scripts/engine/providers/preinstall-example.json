@@ -23,19 +23,7 @@
             "icon": "",
             "model": "claude-3-sonnet-20240229",
             "capabilities": 1
-        },
-        "ZhiPuChat": {
-            "name": "ZhiPu Chat",
-            "icon": "ask-ai",
-            "model": "glm-4",
-            "capabilities": 1
-          },
-          "ZhiPuImage": {
-            "name": "ZhiPu Image",
-            "icon": "image",
-            "model": "cogview-3",
-            "capabilities": 2
-          }
+        }
     },
     
     "providers": {

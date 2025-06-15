@@ -1,8 +1,8 @@
 "use strict";
 
 export default class Provider extends AI.Provider {
-	constructor(options) {
-		super("ZhiPu-GLM", "https://open.bigmodel.cn", options.key, "/api/paas/v4");
+	constructor() {
+		super("ZhiPu-GLM", "https://open.bigmodel.cn/api/paas/v4", "");
 	}
 
 	correctModelInfo(model) {
