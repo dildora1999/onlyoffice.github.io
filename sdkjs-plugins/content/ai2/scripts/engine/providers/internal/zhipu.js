@@ -1,79 +1,69 @@
 "use strict";
 
-export default class Provider extends AI.Provider {
+class Provider extends AI.Provider {
+
 	constructor() {
 		super("ZhiPu-GLM", "https://open.bigmodel.cn/api/paas/v4", "");
 	}
 
 	correctModelInfo(model) {
-		model.id = model.name = model.id || model.name;
-	}
-
-	checkExcludeModel(model) {
-		return false; // keep all models visible
+		model.id = model.name;
 	}
 
 	checkModelCapability(model) {
-		if (model.id === "glm-4") {
-			model.endpoints = [AI.Endpoints.Types.v1.Chat_Completions];
-			return AI.CapabilitiesUI.Chat;
-		} else if (model.id === "cogview-3") {
-			model.endpoints = [AI.Endpoints.Types.v1.Images_Generations];
-			return AI.CapabilitiesUI.Image;
-		}
-		return AI.CapabilitiesUI.All;
+		// ZhiPu GLM-4 supports chat completions only
+		model.options.max_input_tokens = 8192; // Adjust based on model limits
+		model.endpoints.push(AI.Endpoints.Types.v1.Chat_Completions);
+		return AI.CapabilitiesUI.Chat;
 	}
 
-	getRequestHeaderOptions(stream = false) {
-		const headers = {
-			"Authorization": `Bearer ${this.key}`,
-			"Content-Type": "application/json"
+	getEndpointUrl(endpoint, model) {
+		let Types = AI.Endpoints.Types;
+		let url = "";
+
+		switch (endpoint) {
+			case Types.v1.Models:
+				url = "/models"; // ZhiPu doesn't expose model listing, mock it if needed
+				break;
+			default:
+				url = "/chat/completions"; // ZhiPu GLM endpoint
+				break;
+		}
+
+		if (this.key)
+			url = this.path + url + "?api_key=" + this.key;
+		else
+			url = this.path + url;
+
+		return url;
+	}
+
+	getRequestHeaderOptions() {
+		return {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${this.key}`
 		};
-		if (stream) headers["Accept"] = "text/event-stream";
-		return headers;
 	}
 
 	getChatCompletions(message, model) {
-		const messages = message.messages.map(m => ({
-			role: m.role,
-			content: m.content
-		}));
-
-		const system = this.getSystemMessage(message, true);
-		if (system) {
-			messages.unshift({ role: "system", content: system });
+		let messages = [];
+		for (let i = 0, len = message.messages.length; i < len; i++) {
+			let m = message.messages[i];
+			messages.push({ role: m.role, content: m.content });
 		}
 
 		return {
 			model: model.id,
-			messages,
-			stream: true
+			messages: messages
 		};
 	}
 
-	getChatCompletionsResult(message, model) {
-		const result = { content: [] };
-		const choices = message?.data?.choices;
-		if (!choices || !choices[0]) return result;
-
-		if (choices[0].delta?.content) result.content.push(choices[0].delta.content);
-		else if (choices[0].message?.content) result.content.push(choices[0].message.content);
-
-		return result;
+	// ZhiPu currently does not support image generation or vision
+	getImageGeneration() {
+		return {};
 	}
 
-	getImageGeneration(message, model) {
-		return {
-			model: model.id,
-			prompt: message.prompt
-		};
-	}
-
-	async getImageGenerationResult(message, model) {
-		const data = message?.data;
-		if (data && data?.data?.[0]?.url) {
-			return await AI.ImageEngine.getBase64FromUrl(data.data[0].url);
-		}
-		return "";
+	async getImageVision() {
+		return {};
 	}
 }
