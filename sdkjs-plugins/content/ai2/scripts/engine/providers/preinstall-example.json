@@ -23,7 +23,19 @@
             "icon": "",
             "model": "claude-3-sonnet-20240229",
             "capabilities": 1
-        }
+        },
+        "ZhiPuChat": {
+            "name": "ZhiPu Chat",
+            "icon": "ask-ai",
+            "model": "glm-4",
+            "capabilities": 1
+          },
+          "ZhiPuImage": {
+            "name": "ZhiPu Image",
+            "icon": "image",
+            "model": "cogview-3",
+            "capabilities": 2
+          }
     },
     
     "providers": {
@@ -98,16 +110,24 @@
             "url": "https://open.bigmodel.cn",
             "key": "12fd15403c314b5bbff82329e51e0487.Eg3uGUNX9FPY90ez",
             "models": [
-                {
-                    "id": "glm-4",
-                    "object": "model",
-                    "owned_by": "zhipu",
-                    "name": "glm-4",
-                    "endpoints": [],
-                    "options": {}
+              {
+                "id": "glm-4",
+                "name": "glm-4",
+                "object": "model",
+                "endpoints": [1],
+                "options": {
+                  "max_input_tokens": 8192
                 }
+              },
+              {
+                "id": "cogview-3",
+                "name": "cogview-3",
+                "object": "model",
+                "endpoints": [2],
+                "options": {}
+              }
             ]
-        }
+          }
     },
     "models": [
         {
@@ -163,6 +183,12 @@
             "provider": "ZhiPu",
             "name": "ZhiPu [glm-4]",
             "id": "glm-4"
+        },
+        {
+            "capabilities": 2,
+            "provider": "ZhiPu",
+            "name": "ZhiPu [cogview-3]",
+            "id": "cogview-3"
         }
     ]
 }
