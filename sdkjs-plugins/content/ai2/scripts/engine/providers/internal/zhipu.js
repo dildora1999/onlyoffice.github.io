@@ -6,34 +6,6 @@ class Provider extends AI.Provider {
 		super("ZhiPu", "https://open.bigmodel.cn/api/paas/v4", "");
 	}
 
-	correctModelInfo(model) {
-		model.id = model.name = model.id || model.name;
-	}
-
-	checkExcludeModel(model) {
-		return false; // keep all models visible
-	}
-
-	checkModelCapability(model) {
-		if (model.id === "glm-4") {
-			model.endpoints = [AI.Endpoints.Types.v1.Chat_Completions];
-			return AI.CapabilitiesUI.Chat;
-		} else if (model.id === "cogview-3") {
-			model.endpoints = [AI.Endpoints.Types.v1.Images_Generations];
-			return AI.CapabilitiesUI.Image;
-		}
-		return AI.CapabilitiesUI.All;
-	}
-
-	getRequestHeaderOptions(stream = false) {
-		const headers = {
-			"Authorization": `Bearer ${this.key}`,
-			"Content-Type": "application/json"
-		};
-		if (stream) headers["Accept"] = "text/event-stream";
-		return headers;
-	}
-
 	getModels() {
 		return [
 			{
@@ -54,7 +26,32 @@ class Provider extends AI.Provider {
 			}
 		];
 	}
-	
+
+	correctModelInfo(model) {
+		model.id = model.name = model.id || model.name;
+	}
+
+	checkExcludeModel(model) {
+		return false; // keep all models visible
+	}
+
+	checkModelCapability(model) {
+		if (model.id === "glm-4") {
+			model.endpoints = [AI.Endpoints.Types.v1.Chat_Completions];
+			return AI.CapabilitiesUI.Chat;
+		} else if (model.id === "cogview-3") {
+			model.endpoints = [AI.Endpoints.Types.v1.Images_Generations];
+			return AI.CapabilitiesUI.Image;
+		}
+		return AI.CapabilitiesUI.All;
+	}
+
+	getRequestHeaderOptions() {
+		return {
+			"Authorization": `Bearer ${this.key}`,
+			"Content-Type": "application/json"
+		};
+	}
 
 	getChatCompletions(message, model) {
 		const messages = message.messages.map(m => ({
@@ -70,7 +67,7 @@ class Provider extends AI.Provider {
 		return {
 			model: model.id,
 			messages,
-			stream: true
+			stream: false
 		};
 	}
 
@@ -79,8 +76,8 @@ class Provider extends AI.Provider {
 		const choices = message?.data?.choices;
 		if (!choices || !choices[0]) return result;
 
-		if (choices[0].delta?.content) result.content.push(choices[0].delta.content);
-		else if (choices[0].message?.content) result.content.push(choices[0].message.content);
+		if (choices[0].message?.content) result.content.push(choices[0].message.content);
+		else if (choices[0].delta?.content) result.content.push(choices[0].delta.content);
 
 		return result;
 	}
